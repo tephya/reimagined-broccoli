@@ -1,0 +1,20 @@
+用C++创建的指针扩容需要注意什么？
+
+例如我们如下指针：
+int *ptr=new int[size];
+
+//扩容
+//(错误示范)
+ptr=(int*) realloc(ptr,2*sizeof(int));
+//这样做容易出错，因为兼容问题
+
+//(正确示范)
+int new_size=2*size;
+int *new_ptr=new int[new_size];
+for(...){
+  //将原动态内存通过循环复制到新动态内存上
+}
+delete[] ptr;   //插入一个点，如果指针仅存一个元素的话，用"delete"删除而非"delete[]"
+ptr=new_ptr;
+size=new_size;
+
