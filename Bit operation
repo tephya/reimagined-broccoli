@@ -1,0 +1,22 @@
+cn:位操作：用位运算实现状态标志位管理
+en:Bit operation: Implement status flag bit management with bit operation
+
+#include<stdio.h>
+
+//创建一个位域
+//位域是什么？位域是种特殊的结构体，允许定义结构体成员占用固定的位数，通常用于表示状态或标志
+//好处：可以有效地节省内存
+struct SystemStautus{
+    unsigned int running : 1;  //如这里，running仅占用一个字节内存
+    unsigned int stopped : 1;  //值得一提的是，unsigned int是非负的
+    unsigned int error :1;
+};
+
+int main(){
+    SystemStautus status;
+    status.running = 1;
+    status.stopped = 0;
+    status.error = 0;
+    printf("System is %s\n", status.running ? "running" : "stopped");
+    return 0;
+}   
